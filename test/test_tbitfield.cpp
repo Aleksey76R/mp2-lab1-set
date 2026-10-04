@@ -309,3 +309,21 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+//    Собственный тест
+
+TEST(TBitField_Custom, chain_of_or_operators)
+{
+  const int size = 4;
+  TBitField bf1(size), bf2(size), bf3(size), expBf(size);
+
+  bf1.SetBit(0);
+  bf2.SetBit(1);
+  bf3.SetBit(2);
+  expBf.SetBit(0);
+  expBf.SetBit(1);
+  expBf.SetBit(2);
+
+  TBitField res = bf1 | bf2 | bf3;   // цепочка ИЛИ в одну строку
+  EXPECT_EQ(expBf, res);
+}

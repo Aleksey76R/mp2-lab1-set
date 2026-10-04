@@ -295,3 +295,22 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+// Собственный тест
+
+TEST(TSet_Custom, de_morgan_law)
+{
+  const int size = 5;
+  TSet a(size), b(size);
+
+  a.InsElem(1);
+  a.InsElem(2);
+  b.InsElem(2);
+  b.InsElem(3);
+
+  // ~(A + B) == (~A) * (~B)  — закон де Моргана
+  TSet left  = ~(a + b);
+  TSet right = (~a) * (~b);
+
+  EXPECT_EQ(left, right);
+}
